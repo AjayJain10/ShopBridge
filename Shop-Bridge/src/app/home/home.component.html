@@ -1,0 +1,10 @@
+
+<div class="container-fluid container-pos">
+
+  <app-header [items]="items" [title]="'Shop-Bridge'" (syncEventEmitter)="getAllItems()"></app-header>
+  
+  <app-dashboard-content [items]="items" (itemActionEmitter)="onDeleteItem($event)"></app-dashboard-content>
+  
+  <app-footer [itemsCount]="itemsCount"></app-footer>
+  
+</div>
