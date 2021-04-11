@@ -1,0 +1,38 @@
+<div class="content-pos">
+    <form [formGroup]="itemsForm">
+        <div class="container form-pos">
+            <fieldset>
+                <legend>Create Item</legend>
+                <div class="form-content-pos">
+                    <label for="itemName" class="mr-1">Name: <sup style="color: red;">*</sup> </label>
+                    <input [ngClass]="{'error-border': submitBtnClicked && itemsForm.get('itemName').invalid }"
+                        type="text" placeholder="Item name" name="itemName" id="itemName" formControlName="itemName">
+                    <br />
+                    <label for="itemDescription" class="mr-1 mt-3 text-align">Description: </label>
+                    <input type="text" placeholder="Item description" name="itemDescription" id="itemDescription"
+                        formControlName="itemDescription">
+                    <br />
+                    <label for="itemPrice" class="mr-1 mt-3">Price: <sup style="color: red;">*</sup></label>
+                    <span style="color:rgb(53, 52, 52);"> ₹ </span><input type="number"
+                        [ngClass]="{'error-border': submitBtnClicked && itemsForm.get('itemPrice').invalid }"
+                        name="itemPrice" placeholder="Item price" min="0" id="itemPrice" formControlName="itemPrice">
+                    <br />
+                    <label for="itemDiscount" class="mr-1 mt-3">Discount: </label>
+                    <input type="number" placeholder="Item discount" min="0" name="itemDiscount" id="itemDiscount"
+                        formControlName="itemDiscount"> <span style="color:rgb(85, 82, 82);"> (in %) </span>
+                    <br />
+                    <label for="itemQtyAvailable" class="mr-1 mt-3">Quantity Available: </label>
+                    <input type="number" placeholder="Quantity left" min="0" name="itemQtyAvailable"
+                        id="itemQtyAvailable" formControlName="itemQtyAvailable">
+                    <br />
+                    <button class="btn btn-primary mx-1" (click)="onSubmit()"><b>Submit</b></button>
+                    <button class="btn btn-primary" (click)="onClear()"><b>Clear</b></button>
+                    <span *ngIf="errorMsgFlag" style="color:darkred"> &nbsp;&nbsp; Please fill out all required fields!
+                    </span>
+                </div>
+            </fieldset>
+        </div>
+    </form>
+</div>
+
+<app-loader *ngIf="loaderFlag"></app-loader>

@@ -1,0 +1,40 @@
+.container-pos {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    z-index: 200;
+    // border: red 1px solid;
+}
+
+.modal-pos {
+    position: fixed;
+    padding: 1rem;
+    top: 40%;
+    left: 45%;
+    z-index: 300;
+    opacity: 1;
+    width: fit-content;
+    height: fit-content;
+}
+
+.loader {
+    border: 0px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid blue;
+    border-bottom: 16px solid blue;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

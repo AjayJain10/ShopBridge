@@ -1,0 +1,48 @@
+@import '../dashboard-content/dashboard-content.component.scss';
+
+legend {
+    width: auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-pos {
+    padding: 0 2% 0 2%;
+    width: fit-content;
+    border: 1px solid black;
+}
+
+.form-content-pos label {
+    display: inline-block;
+    text-align: left;
+    color: #36357e;
+    font-weight: 500;
+}
+
+.form-content-pos input {
+    display: inline-block;
+    // text-align: right;
+    // border: 2px solid black;
+}
+
+.mr-1 {
+    margin-right: 1rem;
+}
+
+.mx-1 {
+    margin: 1rem !important;
+}
+
+.form-content-pos {
+    text-align: left;
+}
+
+.error-border.ng-invalid {
+    border: red 0.5px solid;
+}
+
+  

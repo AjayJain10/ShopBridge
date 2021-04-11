@@ -7,9 +7,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() items: any = [];
+  @Input() itemsCount: number = 0;
   @Input() title: string;
-  @Output() syncEventEmitter = new EventEmitter();
+  @Output() syncEventEmitter = new EventEmitter<string>();
 
   constructor() { }
 
@@ -17,7 +17,11 @@ export class HeaderComponent implements OnInit {
   }
 
   getAllItems() {
-    this.syncEventEmitter.emit();
+    this.syncEventEmitter.emit('sync');
+  }
+
+  createNewItem() {
+    this.syncEventEmitter.emit('create');
   }
 
 }

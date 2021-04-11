@@ -1,9 +1,11 @@
-<header >
+<header>
   <div class="header-pos p-3 mb-3 text-center">
     <h1 class="mb-3" style="color: rgb(40, 40, 75)">Welcome to {{ title }}!</h1>
     <h4 class="mb-3" style="color: rgb(44, 44, 138)">Dashboard</h4>
 
-    <button class="dashboard-button"><img src="assets/plus.svg"><b>Add new Item</b></button>
-    <button class="dashboard-button" (click)="getAllItems()"><img src="assets/refresh.svg"><b>{{items && items.length > 0 ? ' Refresh' : ' Fetch'}}</b></button>
+    <a class="dashboard-button" routerLink="/item"><img src="assets/plus.svg"><b>Add new
+        Item</b></a> &nbsp;&nbsp;&nbsp;
+    <a class="dashboard-button" routerLink="/dashboard"><img
+        src="assets/refresh.svg"><b>{{itemsCount && itemsCount > 0 ? ' Refresh' : ' Fetch'}}</b></a>
   </div>
 </header>
