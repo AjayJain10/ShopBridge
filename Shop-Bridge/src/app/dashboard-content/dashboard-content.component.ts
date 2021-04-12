@@ -97,6 +97,7 @@ export class DashboardContentComponent implements OnInit {
         this.noResultsFlag = true;
       }
       this.items = [];
+      this.commonService.updateItemsCount(tempArray.length);
       this.transposeItemsArray(tempArray);
     }
   }
