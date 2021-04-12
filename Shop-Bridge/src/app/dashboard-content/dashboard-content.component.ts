@@ -1,18 +1,20 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonServiceService } from 'src/services/common-service.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-content',
   templateUrl: './dashboard-content.component.html',
   styleUrls: ['./dashboard-content.component.scss']
 })
-export class DashboardContentComponent implements OnInit {
+export class DashboardContentComponent implements OnInit, OnDestroy {
 
   noDataText: string = '';
   items: Array<any> = [];
   itemsToSearch: Array<any> = [];
   noResultsFlag: boolean = false;
+  subscription: Subscription;
   deleteInfo: { selectedItemToDelete: number, status: string, message: string } = { selectedItemToDelete: null, status: '', message: '' };
 
   constructor(private commonService: CommonServiceService, private router: Router) { }
@@ -21,9 +23,9 @@ export class DashboardContentComponent implements OnInit {
     this.getAllItems();
   }
 
-  getAllItems() {
-    this.commonService.updateLoaderStatus(true);
-    this.commonService.getAllItems().subscribe(data => {
+  getAllItems() { // Fetch data from API: GET operation
+    this.commonService.updateLoaderStatus(true); // 
+    this.subscription = this.commonService.getAllItems().subscribe(data => {
       console.log(data);
       if (data && data.status === 'success') {
         this.commonService.updateItemsCount(data.data.length);
@@ -41,7 +43,7 @@ export class DashboardContentComponent implements OnInit {
     });
   }
 
-  transposeItemsArray(data: any) {
+  transposeItemsArray(data: any) { // Grouping 3 array items into one array entry to display items using bootstrap row and col format.
     let count: number = 0;
     let tempArray: Array<any> = [];
     data.forEach(item => {
@@ -59,14 +61,14 @@ export class DashboardContentComponent implements OnInit {
     }
   }
 
-  onEditItem(itemId: number) {
+  onEditItem(itemId: number) { // Edit or Update the existing item by routing to the existing component
     this.router.navigate(['/item'], { queryParams: { itemId: itemId } });
   }
 
-  onDeleteItem(itemId: number) {
+  onDeleteItem(itemId: number) { // Delete item from the database, Response will come but won't get update in DB due to dummy API: DELETE
     this.commonService.updateLoaderStatus(true);
     this.deleteInfo.selectedItemToDelete = itemId;
-    this.commonService.deleteItem(itemId).subscribe(data => {
+    this.subscription = this.commonService.deleteItem(itemId).subscribe(data => {
       console.log('Success', data);
       this.deleteInfo.status = 'success';
       this.deleteInfo.message = '  Deleted Item no:' + this.deleteInfo.selectedItemToDelete + 'successfully!';
@@ -85,7 +87,7 @@ export class DashboardContentComponent implements OnInit {
     });
   }
 
-  onSearch(event) {
+  onSearch(event) { // To search items incase of huge data available in the dashboard
     console.log(this.itemsToSearch);
     if (this.itemsToSearch && this.itemsToSearch.length > 0) {
       const tempArray: Array<any> = this.itemsToSearch.filter(item => item.employee_name.toLocaleLowerCase().indexOf(event.target.value.toLocaleLowerCase()) > -1);
@@ -99,6 +101,12 @@ export class DashboardContentComponent implements OnInit {
       this.items = [];
       this.commonService.updateItemsCount(tempArray.length);
       this.transposeItemsArray(tempArray);
+    }
+  }
+
+  ngOnDestroy() { // Unsubscribing from observable
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 

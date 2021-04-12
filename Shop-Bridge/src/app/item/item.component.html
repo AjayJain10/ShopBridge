@@ -1,14 +1,15 @@
 <div class="item-content-pos">
     <form [formGroup]="itemsForm">
         <div class="container form-pos">
-            <a class="empty-data-link" *ngIf="editMode && !itemsForm.value.name" (click)="loadItemData()">Fetch item's existing Data</a>
+            <a class="empty-data-link" *ngIf="editMode && !itemsForm.value.name" (click)="loadItemData()">Fetch item's
+                existing Data</a>
             <fieldset>
                 <legend>{{ editMode ? 'Update Item' : 'Create Item'}} </legend>
-                
+
                 <div class="form-content-pos">
                     <label for="name" class="mr-1">Name: <sup style="color: red;">*</sup> </label>
-                    <input [ngClass]="{'error-border': submitBtnClicked && itemsForm.get('name').invalid }"
-                        type="text" placeholder="Item name" name="name" id="name" formControlName="name">
+                    <input [ngClass]="{'error-border': submitBtnClicked && itemsForm.get('name').invalid }" type="text"
+                        placeholder="Item name" name="name" id="name" formControlName="name">
                     <!-- <br />
                     <label for="itemDescription" class="mr-1 mt-3 text-align">Description: </label>
                     <input type="text" placeholder="Item description" name="itemDescription" id="itemDescription"
@@ -17,21 +18,26 @@
                     <label for="salary" class="mr-1 mt-3">Price: <sup style="color: red;">*</sup></label>
                     <span style="color:rgb(53, 52, 52);"> ₹ </span>
                     <input type="number"
-                        [ngClass]="{'error-border': submitBtnClicked && itemsForm.get('salary').invalid }"
-                        name="salary" placeholder="Item price" min="0" id="salary" formControlName="salary">
+                        [ngClass]="{'error-border': submitBtnClicked && itemsForm.get('salary').invalid }" name="salary"
+                        placeholder="Item price" min="0" id="salary" formControlName="salary">
                     <br />
                     <label for="age" class="mr-1 mt-3">Discount: </label>
-                    <input type="number" placeholder="Item discount" min="0" name="age" id="age"
-                        formControlName="age"> <span style="color:rgb(85, 82, 82);"> (in %) </span>
+                    <input type="number" placeholder="Item discount" min="0" name="age" id="age" formControlName="age">
+                    <span style="color:rgb(85, 82, 82);"> (in %) </span>
                     <!-- <br />
                     <label for="itemQtyAvailable" class="mr-1 mt-3">Quantity Available: </label>
                     <input type="number" placeholder="Quantity left" min="0" name="itemQtyAvailable"
                         id="itemQtyAvailable" formControlName="itemQtyAvailable"> -->
                     <br />
-                    <button class="btn btn-primary mx-1" (click)="onSubmit()"><b>{{editMode ? 'Update' : 'Create'}}</b></button>
-                    <button class="btn btn-primary" (click)="onCancel()"><b>{{editMode ? 'Cancel' : 'Clear'}}</b></button>
-                    <span *ngIf="errorMsgFlag" style="color:darkred"> &nbsp;&nbsp; Please fill out all required fields!</span>
-                    <span *ngIf="itemActionMsg && itemActionMsg.message" [ngClass]="itemActionMsg.status === 'error' ? 'error-status' : 'success-status'"> &nbsp;&nbsp; {{itemActionMsg.message}}</span>
+                    <button class="btn btn-primary mx-1"
+                        (click)="onSubmit()"><b>{{editMode ? 'Update' : 'Create'}}</b></button>
+                    <button class="btn btn-primary"
+                        (click)="onCancel()"><b>{{editMode ? 'Cancel' : 'Clear'}}</b></button>
+                    <span *ngIf="errorMsgFlag" style="color:darkred"> &nbsp;&nbsp; Please fill out all required
+                        fields!</span>
+                    <span *ngIf="itemActionMsg && itemActionMsg.message"
+                        [ngClass]="itemActionMsg.status === 'error' ? 'error-status' : 'success-status'"> &nbsp;&nbsp;
+                        {{itemActionMsg.message}}</span>
                 </div>
             </fieldset>
         </div>
