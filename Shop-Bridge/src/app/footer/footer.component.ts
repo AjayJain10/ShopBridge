@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CommonServiceService } from 'src/services/common-service.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,11 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  @Input() itemsCount: number = 0;
+itemsCount: number;
 
-  constructor() { }
+  constructor(private commonService: CommonServiceService) { }
 
   ngOnInit() {
+    this.commonService.itemCountObservable.subscribe(itemsCount => {
+      this.itemsCount = itemsCount;
+    });
   }
 
 }

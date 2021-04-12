@@ -8,10 +8,27 @@
     padding-bottom: 4rem;
 }
 
+.search-input {
+    width: 34%;
+    padding: 5px;
+    margin: 5px 0;
+    outline: none;
+    border-color: transparent;
+    border-bottom: 2px solid #1c87c9;
+}
+
 .success-color {
     color: green;
 }
 
 .error-color {
     color: red;
+}
+
+.card-body label {
+    color: grey;
+}
+
+.card-body span {
+    font-weight: 400;
 }

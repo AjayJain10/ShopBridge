@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, ChangeDetectorRef } from '@angular/core';
 import { CommonServiceService } from 'src/services/common-service.service';
 
 @Component({
@@ -6,30 +6,22 @@ import { CommonServiceService } from 'src/services/common-service.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterContentChecked  {
 
-  items: Array<any> = [];
-  itemsCount: number = 0;
   loaderFlag: boolean = false;
 
-  constructor(private commonService: CommonServiceService) { }
+  constructor(private commonService: CommonServiceService, private cdr: ChangeDetectorRef) {
+    this.commonService.loaderObservable.subscribe(loaderFlag => {
+      console.log(loaderFlag);
+      this.loaderFlag = loaderFlag;
+    });
+   }
 
-  ngOnInit() {
-    // this.getAllItems();
+   ngAfterContentChecked() {
+    this.cdr.detectChanges();
   }
 
-  getAllItems() {
-    this.loaderFlag = true;
-    this.commonService.getAllItems().subscribe(data => {
-      console.log(data);
-      if (data && data.status === 'success') {
-
-        this.itemsCount = data.data.length;
-      }
-    }, error => {
-      this.loaderFlag = false;
-      console.log(error);
-    });
+  ngOnInit() {
   }
 
 }

@@ -4,6 +4,24 @@ legend {
     width: auto;
 }
 
+.item-content-pos{
+    position: absolute;
+    top: 14rem;
+    width: 98%;
+    height: fit-content;
+    bottom: 5rem;
+    overflow: auto;
+    padding-bottom: 4rem;
+}
+
+.success-status {
+    color: green;
+}
+
+.error-status {
+    color: red;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -43,6 +61,11 @@ input::-webkit-inner-spin-button {
 
 .error-border.ng-invalid {
     border: red 0.5px solid;
+}
+
+.empty-data-link {
+    // float: right;
+    cursor: pointer;
 }
 
   

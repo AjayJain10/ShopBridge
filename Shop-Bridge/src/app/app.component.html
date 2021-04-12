@@ -1,12 +1,11 @@
-<div class="container-fluid container-pos" [ngClass]="{'opacity-2': loaderFlag}">
+<div class="container-fluid container-pos">
 
-  <app-header [itemsCount]="itemsCount" [title]="'Shop-Bridge'"></app-header>
+  <app-header></app-header>
 
   <router-outlet>
   </router-outlet>
 
-  <app-footer [itemsCount]="itemsCount"></app-footer>
-
+  <app-footer></app-footer>
+  <app-loader *ngIf="loaderFlag"></app-loader>
 </div>
 
-<app-loader *ngIf="loaderFlag"></app-loader>

@@ -1,17 +1,29 @@
 <div class="content-pos">
+  <div class="input-group rounded">
+    <input type="text" [disabled]="!noResultsFlag && (items && items.length === 0)" (input)="onSearch($event)" class="rounded search-input" placeholder="Search by Item name" aria-label="Search"
+      aria-describedby="search-addon" />
+      <img src="assets/search.svg">
+  </div>
+  <!-- <input class="search-input" type="text" placeholder="Search Item name"> -->
   <ng-container *ngIf="items && items.length > 0">
     <ng-container *ngFor="let item of items">
-      <div class="row">
+      <div class="row mb-2">
         <ng-container *ngFor="let itm of item">
         <div class="col-sm-4">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">{{itm.id}}.  {{itm.employee_name}}</h5>
-              <span class="card-text">{{itm.employee_age}}</span>
-              <p class="card-text">{{itm.employee_salary}}</p>
-              <button class="btn btn-primary">Edit</button> &nbsp;&nbsp;&nbsp;
+              <label class="card-text" for="employee_salary">Price: &nbsp;&nbsp; </label>
+              <span id="employee_salary" name="employee_salary" class="card-text">{{itm.employee_salary}}</span>
+              <br/>
+              <label class="card-text" for="employee_age">Discount: &nbsp;&nbsp; </label>
+              <span id="employee_age" name="employee_age" class="card-text">{{itm.employee_age}}</span>%
+              <br/>
+              <div class="mt-1">
+              <button class="btn btn-primary" (click)="onEditItem(itm.id)">Edit</button> &nbsp;&nbsp;&nbsp;
               <button class="btn btn-primary" (click)="onDeleteItem(itm.id)">Delete</button>
-              <span [ngClass]="deleteInfo.status === 'success' ? 'success-color' : 'error-color'" *ngIf="itm.id === deleteInfo?.selectedItemToDelete"> {{deleteInfo.message}} </span>
+              <span [ngClass]="deleteInfo.status === 'success' ? 'success-color' : 'error-color'" *ngIf="itm.id === deleteInfo?.selectedItemToDelete"> &nbsp;&nbsp; {{deleteInfo.message}} </span>
+            </div>
             </div>
           </div>
         </div>
@@ -20,10 +32,9 @@
     </ng-container>
   </ng-container>
 
-  <!-- <ng-container > -->
-    <h2 *ngIf="items && items.length === 0" style="color: darkred; text-align: center; margin-top: 5rem;">No response from API, Kindly click here '<a routerLink="/dashboard" (click)="getAllItems()" >Fetch</a>' API data.</h2>
-  <!-- </ng-container> -->
-  
+    <h2 *ngIf="items && items.length === 0 && !noResultsFlag" style="color: darkred; text-align: center; margin-top: 5rem;">No response from API, Kindly click here to <a routerLink="/dashboard" (click)="getAllItems()" >Fetch</a> all items.</h2>
+    <h4 *ngIf="noResultsFlag" style="color: darkred; text-align: center; margin-top: 5rem;">No results found !</h4>
+
+
 </div>
 
-<app-loader *ngIf="loaderFlag"></app-loader>
